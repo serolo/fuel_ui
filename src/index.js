@@ -1,5 +1,5 @@
-if (typeof PIXI === 'undefined') {
-  console.warn('pixi.js has to be loaded before loading FUELUI');
+if (typeof cc === 'undefined' && typeof ccui === 'undefined') {
+  console.warn('coco2d-html5.js has to be loaded before loading FUELUI');
   return;
 }
 
@@ -9,4 +9,4 @@ var core = module.exports = require('./core');
 core.utils          = require('./utils');
 
 // export FUELUI globally.
-global.FUEL_UI = core;
+global.fuel_ui = core;

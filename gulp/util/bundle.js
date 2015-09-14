@@ -48,7 +48,7 @@ function rebundle(devBundle) {
 function createBundler(args) {
     args = args || {};
     args.debug = true;
-    args.standalone = 'FUEL_UI';
+    args.standalone = 'fuel_ui';
 
     var bundle = browserify(paths.jsEntry, args),
         argv = require('minimist')(process.argv.slice(2)),

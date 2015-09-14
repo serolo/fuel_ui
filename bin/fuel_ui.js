@@ -1,3 +1,4 @@
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.fuel_ui = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 fuel_ui.Panel = ccui.Layout.extend({
 
     _drawNode: null,
@@ -202,3 +203,122 @@ _p = null;
 ccui.Layout.create = function () {
     return new ccui.Layout();
 };
+},{}],2:[function(require,module,exports){
+fuel_ui.RectPanel = fuel_ui.Panel.extend({
+
+    ctor: function() {
+        fuel_ui.Panel.prototype.ctor.call(this);
+    },
+
+    /**
+     * Initializes a ccui.ScrollView. Please do not call this function by yourself, you should pass the parameters to constructor to initialize it.
+     * @returns {boolean}
+     */
+    init: function () {
+        return fuel_ui.Panel.prototype.init.call(this);
+    },
+
+    /**
+     * Calls the parent class' onEnter and schedules update function.
+     * @override
+     */
+    onEnter: function () {
+        fuel_ui.Panel.prototype.onEnter.call(this);
+    },
+
+    _initRenderer: function () {
+        fuel_ui.Panel._initRenderer.call(this);
+    },
+
+    _onSizeChanged: function () {
+        fuel_ui.Panel.prototype._onSizeChanged.call(this);
+    },
+
+    /**
+     * The touch began event callback handler of fuel_ui.Panel.
+     * @param {cc.Touch} touch
+     * @param {cc.Event} event
+     * @returns {boolean}
+     */
+    onTouchBegan: function (touch, event) {
+        var pass = fuel_ui.Panel.prototype.onTouchBegan.call(this, touch, event);
+        if(pass){
+            //Do the magic for change the color
+        }
+        return pass;
+    },
+
+    /**
+     * The touch ended event callback handler of fuel_ui.Panel.
+     * @param {cc.Touch} touch
+     * @param {cc.Event} event
+     */
+    onTouchEnded: function (touch, event) {
+        fuel_ui.Panel.prototype.onTouchEnded.call(this, touch, event);
+        //do the magic for finish the touch
+    },
+
+    /**
+     * The touch canceled event callback of fuel_ui.Panel.
+     * @param {cc.Touch} touch
+     * @param {cc.Event} event
+     */
+    onTouchCancelled: function (touch, event) {
+        fuel_ui.Panel.prototype.onTouchCancelled.call(this, touch, event);
+        //do the magic for cancel the touch
+    },
+
+    createGraphicObject: function(width,height) {
+        fuel_ui.Panel.prototype.createGraphicObject.call(this,width,height);
+        var origin = new cc.Point(0,0);
+        var destination = new cc.Point(width,height);
+        this.drawNode.drawRect(origin, destination, this.color, this.edgeWidth, this.edgeColor);
+    },
+
+    createShadow: function(width,height) {
+        fuel_ui.Panel.prototype.createShadow.call(this,width,height);
+    }
+
+});
+},{}],3:[function(require,module,exports){
+/**
+ * @file        Main export of the gown.js core library
+ * @author      Sebastian Romero <sebastian@fuelpowered.com>
+ * @copyright   
+ * @license     {@link }
+ */
+
+/**
+ * @namespace FUEL_UI.core
+ */
+module.exports = {
+    Panel:          require('./Panel'),
+    RectPanel: 	    require('./RectPanel'),
+};
+
+},{"./Panel":1,"./RectPanel":2}],4:[function(require,module,exports){
+(function (global){
+if (typeof cc === 'undefined' && typeof ccui === 'undefined') {
+  console.warn('coco2d-html5.js has to be loaded before loading FUELUI');
+  return;
+}
+
+var core = module.exports = require('./core');
+
+// add core plugins.
+core.utils          = require('./utils');
+
+// export FUELUI globally.
+global.fuel_ui = core;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
+},{"./core":3,"./utils":5}],5:[function(require,module,exports){
+module.exports = {
+    
+};
+},{}]},{},[4])(4)
+});
+
+
+//# sourceMappingURL=fuel_ui.js.map

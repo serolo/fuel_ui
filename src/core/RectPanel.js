@@ -9,7 +9,7 @@ fuel_ui.RectPanel = fuel_ui.Panel.extend({
      * @returns {boolean}
      */
     init: function () {
-        retunr fuel_ui.Panel.prototype.init.call(this);
+        return fuel_ui.Panel.prototype.init.call(this);
     },
 
     /**
@@ -64,7 +64,10 @@ fuel_ui.RectPanel = fuel_ui.Panel.extend({
 
     createGraphicObject: function(width,height) {
         fuel_ui.Panel.prototype.createGraphicObject.call(this,width,height);
-    }
+        var origin = new cc.Point(0,0);
+        var destination = new cc.Point(width,height);
+        this.drawNode.drawRect(origin, destination, this.color, this.edgeWidth, this.edgeColor);
+    },
 
     createShadow: function(width,height) {
         fuel_ui.Panel.prototype.createShadow.call(this,width,height);
